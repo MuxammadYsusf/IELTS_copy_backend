@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package session;
+
+option go_package = "generated/session";
+
+service AuthService {
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+}
+
+message RegisterRequest {
+    int32 userId = 1;
+    string name = 2;
+    int32 phoneNumber = 3;
+    string password = 4;
+}
+
+message RegisterResponse {
+    string message = 1;
+}
+
+message LoginRequest {
+    int32 userId = 1;
+    string name = 2;
+    string password = 3;
+}
+
+message LoginResponse {
+    string message = 1;
+    string token = 2;
+    int32 userId = 3;
+}
+
+message UpdatePasswordRequest {
+    int32 userId = 1;
+    string name = 2;
+    string password = 3;
+}
+
+message UpdatePasswordResponse {
+    string message = 1;
+}

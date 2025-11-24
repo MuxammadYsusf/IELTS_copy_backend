@@ -1,0 +1,253 @@
+syntax = "proto3";
+
+package test;
+
+option go_package = "generated/test";
+
+service QuestionService {
+    rpc CreateQuestion(CreateQuestionRequest) returns (CreateQuestionResponse);
+    rpc GetQuestion(GetQuestionRequest) returns (GetQuestionResponse);
+    rpc GetAllQuestions(GetAllQuestionsRequest) returns (GetAllQuestionsResponse);
+    rpc UpdateQuestion(UpdateQuestionRequest) returns (UpdateQuestionResponse);
+    rpc DeleteQuestion(DeleteQuestionRequest) returns (DeleteQuestionResponse);
+    rpc AnswerToQuestions(AnswerToQuestionsRequest) returns (AnswerToQuestionsResponse);
+    rpc SaveResult(SaveResultRequest) returns (SaveResultResponse);
+    rpc GetResulByAttempt(GetResultByAttemptRequest) returns (GetResultByAttemptResponse);
+    rpc GetAttemptList(GetAttemptListRequest) returns (GetAttemptListResponse);
+    rpc GetUsersAnswerForAttempt(GetUsersAnswerForAttemptRequest) returns (GetUsersAnswerForAttemptResponse);
+    rpc GetUserHistory(GetUserHistoryRequest) returns (GetUserHistoryResponse);
+    rpc CheckAttemptsExist(CheckAttemptsExistRequest) returns (CheckAttemptsExistResponce);
+    rpc GetLastestAttempt(GetLastestAttemptRequest) returns (GetLastestAttemptResponse);
+    rpc SaveAttempts(SaveAttemptsRequest) returns (SaveAttemptsResponse);
+    rpc CheckAnswers(CheckAnswersRequest) returns (CheckAnswersResponse);
+}
+
+message CreateQuestionRequest {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subject_id = 6;
+    int32 grade_id = 7;
+}
+
+message CreateQuestionResponse {
+    string message = 1;
+}
+
+message GetAllQuestionsRequest {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subjectId = 6;
+    int32 gradeId = 7;
+    repeated GetQuestionRequest questions = 8;
+}
+
+message GetAllQuestionsResponse {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subjectId = 6;
+    int32 gradeId = 7;
+    repeated GetQuestionRequest questions = 8;
+}
+message GetQuestionRequest {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subjectId = 6;
+    int32 gradeId = 7;
+}
+
+message GetQuestionResponse {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subjectId = 6;
+    int32 gradeId = 7;
+    repeated GetQuestionRequest questions = 8;
+}
+
+message UpdateQuestionRequest {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subjectId = 6;
+    int32 gradeId = 7;
+}
+
+message UpdateQuestionResponse {
+    int32 questionId = 1;
+    string name = 2;
+    string a = 3;
+    string b = 4;
+    string true_answer = 5;
+    int32 subjectId = 6;
+    int32 gradeId = 7;
+}
+
+message DeleteQuestionRequest {
+    int32 questionId = 1;
+    int32 subjectId = 2;
+    int32 gradeId = 3;
+}
+
+message DeleteQuestionResponse {
+    string message = 1;
+}
+
+message AnswerToQuestionsRequest {
+    int32 resultId = 1;
+    int32 userId = 2;
+    int32 questionId = 3;
+    int32 attemptCount = 4;
+    string selectedOption = 5;
+    bool isCorrect = 6;
+}
+
+message AnswerToQuestionsResponse {
+    int32 resultId = 1;
+    int32 userId = 2;
+    int32 questionId = 3;
+    int32 attemptCount = 4;
+    string selectedOption = 5;
+    bool isCorrect = 6;
+}
+
+message GetResultByAttemptRequest {
+    int32 questionId = 1;
+    int32 userId = 2;
+    int32 attemptId = 3;
+    int32 subjectId = 4;
+    int32 gradeId = 5;
+    string selectedOption = 6;
+    bool isCorrect = 7;
+    repeated QuestionResult results = 8;
+
+}
+
+message GetResultByAttemptResponse {
+    int32 questionId = 1;
+    int32 userId = 2;
+    int32 attemptId = 3;
+    int32 subjectId = 4;
+    int32 gradeId = 5;
+    string selectedOption = 6;
+    bool isCorrect = 7;
+    repeated QuestionResult results = 8;
+
+}
+
+message GetAttemptListRequest {
+    int32 userId = 1;
+    int32 attemptId = 2;
+    int32 correctCount = 3;
+}
+
+message GetAttemptListResponse {
+    int32 userId = 1;
+    int32 attemptId = 2;
+    int32 correctCount = 3;
+    repeated GetAttemptListRequest attemptList = 4;
+}
+
+message SaveResultRequest {
+    int32 questionId = 1;
+    int32 userId = 2;
+    int32 lastAttemptId = 3;
+    string selectedOption = 4;
+    bool isCorrect = 5;
+    repeated QuestionResult results = 6;
+}
+
+message SaveResultResponse {
+    string message = 1;
+    int32 userId = 2;
+}
+
+message QuestionResult {
+    int32 question_id = 1;
+    bool isCorrect = 2;
+    string selected_option = 3;
+    int32 attemptId = 4;
+}
+
+message GetUsersAnswerForAttemptRequest {
+    int32 userId = 1;
+    int32 attemptCount = 2;
+}
+
+message GetUsersAnswerForAttemptResponse {
+    int32 userId = 1;
+    int32 attemptCount = 2;
+}
+
+message GetUserHistoryRequest {
+    int32 userId = 1;
+    int32 attemptCount = 2;
+    int32 questionId = 3;
+    bool isCorrect = 4;
+    string selectedOption = 5;
+}
+
+message GetUserHistoryResponse {
+    int32 userId = 1;
+    int32 attemptCount = 2;
+    int32 questionId = 3;
+    bool isCorrect = 4;
+    string selectedOption = 5;
+    repeated GetUserHistoryRequest userHistory = 6;
+}
+
+message CheckAttemptsExistRequest {
+    int32 userId = 1;
+    int32 attemptCount = 2;
+}
+
+message CheckAttemptsExistResponce {
+    string message = 1;
+    int32 attemptCount = 2;
+}
+
+message GetLastestAttemptRequest {
+    int32 userId = 1;
+    int32 lastAttemptId = 2;
+}
+
+message GetLastestAttemptResponse {
+    int32 userId = 1;
+    int32 lastAttemptId = 2;
+}
+
+message SaveAttemptsRequest {
+    int32 attemptCount = 1;
+    string createdAt = 2;
+}
+
+message SaveAttemptsResponse {
+    string message = 1;
+}
+
+message CheckAnswersRequest {
+    int32 userId = 1;
+    repeated QuestionResult items = 2;
+}
+
+message CheckAnswersResponse {
+    int32 userId = 1;
+    int32 attemptCount = 2;
+    repeated QuestionResult results = 3;
+    int32 incorrectCount = 4;
+}

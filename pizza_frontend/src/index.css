@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #ef4444; /* red-500 */
+}
+
+html, body, #root { height: 100%; }
+
+body { @apply min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 text-gray-900; }
+.dark body { @apply from-zinc-900 via-zinc-950 to-zinc-900 text-gray-100; }
+
+@layer utilities {
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0) }
+    50%      { transform: translateY(-6px) }
+  }
+  .floaty { animation: floaty 6s ease-in-out infinite; }
+}
+
+@layer components {
+  .input {
+    @apply w-full rounded-xl border border-black/10 dark:border-white/10
+           bg-white/70 dark:bg-zinc-900/60 backdrop-blur
+           px-3 py-2 outline-none focus:ring-2 focus:ring-red-400/60 transition;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  @layer utilities {
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 2.5s infinite;
+  }
+}
+}
